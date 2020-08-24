@@ -4,13 +4,9 @@ const SELECTOR_COUNTER = 'SELECTOR_COUNTER';
 
 const selectors = {};
 
-export function setSelector(key, fn) {
+export function setSelector(key, options) {
   if (!selectors[key]) {
-    const sel = selector({
-      key: key,
-      // get: fn,
-      set: fn,
-    });
+    const sel = selector({ ...options, key });
 
     selectors[key] = sel;
   }

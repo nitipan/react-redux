@@ -12,12 +12,21 @@ const appState = {
 setAtom(ATOM_COUNTER, appState);
 
 // Recoil: migrated selector
-setSelector(SELECTOR_COUNTER, ({ get, set }) => {
-  console.log(get, set);
-  const state = get(getAtom(ATOM_COUNTER));
-  // return { ...state, counter: (state.counter += 1) };
-  console.log(state);
+setSelector(SELECTOR_COUNTER, {
+  get: ({ get }) => {
+    const state = get(getAtom(ATOM_COUNTER));
+    return state;
+  },
+  set: ({ set }) => {
+    console.log('set');
+  },
 });
+// setSelector(SELECTOR_COUNTER, ({ get, set }) => {
+//   console.log(get, set);
+//   const state = get(getAtom(ATOM_COUNTER));
+//   // return { ...state, counter: (state.counter += 1) };
+//   console.log(state);
+// });
 
 function counterApp(state = appState, action) {
   switch (action.type) {
