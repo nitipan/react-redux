@@ -2,7 +2,7 @@ import { createStore } from 'redux';
 import { COUNTER_INCREMENT, COUNTER_DECREMENT } from './components/actions';
 
 import { ATOM_COUNTER, setAtom, getAtom } from './atoms';
-import { setSelector, SELECTOR_COUNTER } from './selectors';
+import { setSelector, SELECTOR_INCREMENT_COUNTER } from './selectors';
 
 const appState = {
   counter: 0,
@@ -12,21 +12,14 @@ const appState = {
 setAtom(ATOM_COUNTER, appState);
 
 // Recoil: migrated selector
-setSelector(SELECTOR_COUNTER, {
+setSelector(SELECTOR_INCREMENT_COUNTER, {
   get: ({ get }) => {
     const state = get(getAtom(ATOM_COUNTER));
-    return state;
-  },
-  set: ({ set }) => {
-    console.log('set');
+    return { ...state, counter: state.counter + 1 };
   },
 });
-// setSelector(SELECTOR_COUNTER, ({ get, set }) => {
-//   console.log(get, set);
-//   const state = get(getAtom(ATOM_COUNTER));
-//   // return { ...state, counter: (state.counter += 1) };
-//   console.log(state);
-// });
+
+
 
 function counterApp(state = appState, action) {
   switch (action.type) {

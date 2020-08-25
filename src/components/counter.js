@@ -3,11 +3,11 @@ import { increment, decrement } from './actions';
 import { connect } from 'react-redux';
 import { getAtom, ATOM_COUNTER } from '../atoms';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { SELECTOR_COUNTER, getSelector } from '../selectors';
+import { SELECTOR_INCREMENT_COUNTER, getSelector } from '../selectors';
 
 const Counter = ({ dispatch }) => {
   const [counter, setCounter] = useRecoilState(getAtom(ATOM_COUNTER));
-  const increment = useRecoilValue(getSelector(SELECTOR_COUNTER));
+  const increment = useRecoilValue(getSelector(SELECTOR_INCREMENT_COUNTER));
   return (
     <>
       {/* <button onClick={() => dispatch(increment(1))}>+</button> */}
